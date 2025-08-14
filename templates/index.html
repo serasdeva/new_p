@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}{{ site_name }} — Главная{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <h1>Добро пожаловать в {{ site_name }}</h1>
+  <p>Минимальный, красивый стартовый проект на Flask. Готов расширяться под ваши задачи.</p>
+  <div class="actions">
+    <a class="btn primary" href="/about">Узнать больше</a>
+    <a class="btn" href="https://github.com/serasdeva/new_p" target="_blank" rel="noopener">Исходники</a>
+  </div>
+</section>
+
+<section class="features">
+  <div class="feature">
+    <h3>Быстрый старт</h3>
+    <p>Шаблоны и стили уже готовы — начинайте писать функционал сразу.</p>
+  </div>
+  <div class="feature">
+    <h3>Красивый дизайн</h3>
+    <p>Современная типографика, аккуратные отступы и адаптивная сетка.</p>
+  </div>
+  <div class="feature">
+    <h3>Тесты и стиль кода</h3>
+    <p>Pytest и Ruff настроены для стабильности и чистоты кода.</p>
+  </div>
+</section>
+{% endblock %}
