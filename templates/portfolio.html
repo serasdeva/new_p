@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+
+{% block title %}Портфолио - Фотостудия{% endblock %}
+
+{% block content %}
+<!-- Portfolio Header -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="section-title">
+            <h2>Наше портфолио</h2>
+            <p>Лучшие работы в различных жанрах фотографии</p>
+        </div>
+        
+        <!-- Category Filter -->
+        <div class="category-filter text-center">
+            <a href="{{ url_for('portfolio', category='all') }}" 
+               class="btn category-btn {% if current_category == 'all' %}active{% endif %}">
+                Все категории
+            </a>
+            {% for category in categories %}
+            <a href="{{ url_for('portfolio', category=category) }}" 
+               class="btn category-btn {% if current_category == category %}active{% endif %}">
+                {{ category }}
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Portfolio Grid -->
+<section class="py-5">
+    <div class="container">
+        {% if photos %}
+        <div class="row">
+            {% for photo in photos %}
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card photo-card">
+                    <div class="price-tag">{{ photo.price }}₽</div>
+                    <img src="https://via.placeholder.com/400x300/{{ ['e74c3c', '3498db', '2ecc71', 'f39c12', '9b59b6', '1abc9c'] | random }}/ffffff?text={{ photo.title | urlencode }}" 
+                         alt="{{ photo.title }}" class="card-img-top">
+                    <div class="photo-overlay">
+                        <h5>{{ photo.title }}</h5>
+                        <p>{{ photo.description }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="badge bg-primary">{{ photo.category }}</span>
+                            <small>{{ photo.created_at.strftime('%d.%m.%Y') }}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <!-- Portfolio Stats -->
+        <div class="row mt-5">
+            <div class="col-md-3 text-center mb-4">
+                <div class="card bg-primary text-white">
+                    <div class="card-body">
+                        <h3 class="mb-0">{{ photos|length }}</h3>
+                        <p class="mb-0">Всего работ</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 text-center mb-4">
+                <div class="card bg-success text-white">
+                    <div class="card-body">
+                        <h3 class="mb-0">{{ categories|length }}</h3>
+                        <p class="mb-0">Категорий</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 text-center mb-4">
+                <div class="card bg-warning text-white">
+                    <div class="card-body">
+                        <h3 class="mb-0">{{ photos|selectattr('featured', 'equalto', true)|list|length }}</h3>
+                        <p class="mb-0">Избранных</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 text-center mb-4">
+                <div class="card bg-info text-white">
+                    <div class="card-body">
+                        <h3 class="mb-0">{{ photos|map(attribute='price')|sum|int }}₽</h3>
+                        <p class="mb-0">Общая стоимость</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        {% else %}
+        <div class="text-center py-5">
+            <i class="fas fa-images fa-5x text-muted mb-4"></i>
+            <h3>В данной категории пока нет фотографий</h3>
+            <p class="text-muted">Попробуйте выбрать другую категорию или вернуться на главную</p>
+            <a href="{{ url_for('portfolio', category='all') }}" class="btn btn-primary">
+                <i class="fas fa-images"></i> Смотреть все работы
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Order CTA -->
+{% if photos %}
+<section class="py-5 bg-light">
+    <div class="container text-center">
+        <h3 class="mb-4">Понравились наши работы?</h3>
+        <p class="mb-4">Закажите фотосессию и создайте свои уникальные кадры</p>
+        <div class="d-flex gap-3 justify-content-center flex-wrap">
+            <a href="{{ url_for('order') }}" class="btn btn-primary btn-lg">
+                <i class="fas fa-camera"></i> Заказать фотосессию
+            </a>
+            <a href="{{ url_for('contact') }}" class="btn btn-outline-primary btn-lg">
+                <i class="fas fa-phone"></i> Связаться с нами
+            </a>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Photography Tips -->
+<section class="py-5">
+    <div class="container">
+        <div class="section-title">
+            <h2>Советы по фотосъемке</h2>
+            <p>Полезные рекомендации для лучших результатов</p>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-lightbulb fa-3x text-warning mb-3"></i>
+                        <h5 class="card-title">Освещение</h5>
+                        <p class="card-text">Лучшее время для съемки на улице - "золотой час" за час до заката или после рассвета.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-smile fa-3x text-success mb-3"></i>
+                        <h5 class="card-title">Эмоции</h5>
+                        <p class="card-text">Расслабьтесь и будьте естественными. Лучшие кадры получаются, когда вы чувствуете себя комфортно.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-palette fa-3x text-primary mb-3"></i>
+                        <h5 class="card-title">Одежда</h5>
+                        <p class="card-text">Выбирайте одежду, которая подчеркивает вашу индивидуальность и хорошо смотрится на камере.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

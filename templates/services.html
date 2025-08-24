@@ -1,0 +1,312 @@
+{% extends "base.html" %}
+
+{% block title %}Услуги - Фотостудия{% endblock %}
+
+{% block content %}
+<!-- Services Header -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="section-title">
+            <h2>Наши услуги</h2>
+            <p>Профессиональная фотосъемка для любых событий и случаев</p>
+        </div>
+    </div>
+</section>
+
+<!-- Services Grid -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <!-- Портретная съемка -->
+            <div class="col-lg-6 mb-5">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="fas fa-user-tie fa-3x text-primary me-3"></i>
+                            <div>
+                                <h4 class="card-title mb-1">Портретная съемка</h4>
+                                <p class="text-primary fw-bold mb-0">от 1500₽</p>
+                            </div>
+                        </div>
+                        <p class="card-text">Профессиональные портреты для бизнеса, социальных сетей и личного использования. Создаем образы, которые подчеркивают вашу индивидуальность.</p>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success me-2"></i>Студийная съемка</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Уличная съемка</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Бизнес-портреты</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Креативные образы</li>
+                        </ul>
+                        <div class="mt-3">
+                            <a href="{{ url_for('order') }}" class="btn btn-primary">Заказать</a>
+                            <span class="ms-3 text-muted">Длительность: 1-2 часа</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Свадебная съемка -->
+            <div class="col-lg-6 mb-5">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="fas fa-heart fa-3x text-danger me-3"></i>
+                            <div>
+                                <h4 class="card-title mb-1">Свадебная фотосъемка</h4>
+                                <p class="text-primary fw-bold mb-0">от 5000₽</p>
+                            </div>
+                        </div>
+                        <p class="card-text">Запечатлейте самый важный день в вашей жизни. От подготовки до первого танца - мы будем рядом, чтобы сохранить каждое мгновение.</p>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success me-2"></i>Съемка подготовки</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Церемония бракосочетания</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Свадебная прогулка</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Банкет и торжество</li>
+                        </ul>
+                        <div class="mt-3">
+                            <a href="{{ url_for('order') }}" class="btn btn-primary">Заказать</a>
+                            <span class="ms-3 text-muted">Длительность: Весь день</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Семейная фотосессия -->
+            <div class="col-lg-6 mb-5">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="fas fa-users fa-3x text-success me-3"></i>
+                            <div>
+                                <h4 class="card-title mb-1">Семейная фотосессия</h4>
+                                <p class="text-primary fw-bold mb-0">от 3000₽</p>
+                            </div>
+                        </div>
+                        <p class="card-text">Теплые семейные кадры, которые создают воспоминания на всю жизнь. Съемка в студии, на природе или в домашней обстановке.</p>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success me-2"></i>Семейные портреты</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Съемка на природе</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Домашняя фотосессия</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Праздничные фото</li>
+                        </ul>
+                        <div class="mt-3">
+                            <a href="{{ url_for('order') }}" class="btn btn-primary">Заказать</a>
+                            <span class="ms-3 text-muted">Длительность: 2-3 часа</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Детская фотосессия -->
+            <div class="col-lg-6 mb-5">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="fas fa-child fa-3x text-warning me-3"></i>
+                            <div>
+                                <h4 class="card-title mb-1">Детская фотосессия</h4>
+                                <p class="text-primary fw-bold mb-0">от 2000₽</p>
+                            </div>
+                        </div>
+                        <p class="card-text">Забавные и трогательные кадры ваших малышей. Создаем атмосферу игры, чтобы дети чувствовали себя комфортно и естественно.</p>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success me-2"></i>Съемка в игровой форме</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Портреты по возрастам</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Семейные кадры с детьми</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Праздничные фото</li>
+                        </ul>
+                        <div class="mt-3">
+                            <a href="{{ url_for('order') }}" class="btn btn-primary">Заказать</a>
+                            <span class="ms-3 text-muted">Длительность: 1-2 часа</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Модная фотосъемка -->
+            <div class="col-lg-6 mb-5">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="fas fa-tshirt fa-3x text-info me-3"></i>
+                            <div>
+                                <h4 class="card-title mb-1">Модная фотосъемка</h4>
+                                <p class="text-primary fw-bold mb-0">от 2500₽</p>
+                            </div>
+                        </div>
+                        <p class="card-text">Современная модная фотография для моделей, блогеров и всех, кто хочет создать стильные кадры для портфолио.</p>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success me-2"></i>Студийная съемка</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Уличная модная съемка</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Работа с образами</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Портфолио для моделей</li>
+                        </ul>
+                        <div class="mt-3">
+                            <a href="{{ url_for('order') }}" class="btn btn-primary">Заказать</a>
+                            <span class="ms-3 text-muted">Длительность: 2-3 часа</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Пейзажная фотография -->
+            <div class="col-lg-6 mb-5">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="fas fa-mountain fa-3x text-success me-3"></i>
+                            <div>
+                                <h4 class="card-title mb-1">Пейзажная фотография</h4>
+                                <p class="text-primary fw-bold mb-0">от 800₽</p>
+                            </div>
+                        </div>
+                        <p class="card-text">Красота природы, запечатленная в лучших ракурсах. Городские и природные пейзажи для украшения интерьера.</p>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success me-2"></i>Природные пейзажи</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Городская архитектура</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Сезонная съемка</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Панорамные фото</li>
+                        </ul>
+                        <div class="mt-3">
+                            <a href="{{ url_for('order') }}" class="btn btn-primary">Заказать</a>
+                            <span class="ms-3 text-muted">Длительность: 1-3 часа</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Additional Services -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="section-title">
+            <h2>Дополнительные услуги</h2>
+            <p>Что еще мы можем предложить</p>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <i class="fas fa-edit fa-3x text-primary mb-3"></i>
+                        <h5 class="card-title">Ретушь и обработка</h5>
+                        <p class="card-text">Профессиональная обработка фотографий, ретушь портретов, цветокоррекция.</p>
+                        <p class="text-primary fw-bold">от 500₽ за фото</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <i class="fas fa-print fa-3x text-success mb-3"></i>
+                        <h5 class="card-title">Печать фотографий</h5>
+                        <p class="card-text">Печать на качественной бумаге различных форматов, создание фотоальбомов.</p>
+                        <p class="text-primary fw-bold">от 100₽ за фото</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <i class="fas fa-video fa-3x text-warning mb-3"></i>
+                        <h5 class="card-title">Видеосъемка</h5>
+                        <p class="card-text">Создание видеороликов, клипов, документальных фильмов.</p>
+                        <p class="text-primary fw-bold">от 3000₽</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pricing Table -->
+<section class="py-5">
+    <div class="container">
+        <div class="section-title">
+            <h2>Тарифы и пакеты</h2>
+            <p>Выберите подходящий вариант для вас</p>
+        </div>
+        
+        <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card text-center h-100">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0">Базовый</h4>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">1500₽</h2>
+                        <p class="text-muted">за сессию</p>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success me-2"></i>1-2 часа съемки</li>
+                            <li><i class="fas fa-check text-success me-2"></i>20-30 обработанных фото</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Базовая ретушь</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Готовность через 3-5 дней</li>
+                        </ul>
+                        <a href="{{ url_for('order') }}" class="btn btn-primary">Выбрать</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card text-center h-100 border-primary">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0">Стандарт</h4>
+                        <span class="badge bg-warning">Популярный</span>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">3000₽</h2>
+                        <p class="text-muted">за сессию</p>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success me-2"></i>2-3 часа съемки</li>
+                            <li><i class="fas fa-check text-success me-2"></i>40-50 обработанных фото</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Расширенная ретушь</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Готовность через 2-3 дня</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Смена образов</li>
+                        </ul>
+                        <a href="{{ url_for('order') }}" class="btn btn-primary">Выбрать</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card text-center h-100">
+                    <div class="card-header bg-success text-white">
+                        <h4 class="mb-0">Премиум</h4>
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title">5000₽</h2>
+                        <p class="text-muted">за сессию</p>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success me-2"></i>3-4 часа съемки</li>
+                            <li><i class="fas fa-check text-success me-2"></i>80-100 обработанных фото</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Профессиональная ретушь</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Готовность через 1-2 дня</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Несколько локаций</li>
+                            <li><i class="fas fa-check text-success me-2"></i>Печать 10 фото</li>
+                        </ul>
+                        <a href="{{ url_for('order') }}" class="btn btn-success">Выбрать</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5 bg-primary text-white">
+    <div class="container text-center">
+        <h3 class="mb-4">Готовы начать работу с нами?</h3>
+        <p class="mb-4">Свяжитесь с нами для обсуждения деталей и бронирования даты</p>
+        <div class="d-flex gap-3 justify-content-center flex-wrap">
+            <a href="{{ url_for('order') }}" class="btn btn-light btn-lg">
+                <i class="fas fa-camera"></i> Заказать фотосессию
+            </a>
+            <a href="{{ url_for('contact') }}" class="btn btn-outline-light btn-lg">
+                <i class="fas fa-phone"></i> Связаться с нами
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

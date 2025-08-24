@@ -1,0 +1,202 @@
+{% extends "base.html" %}
+
+{% block title %}Главная - Фотостудия{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <h1>Запечатлейте моменты навсегда</h1>
+        <p>Профессиональная фотосъемка для любых событий и случаев</p>
+        <div class="d-flex gap-3 justify-content-center flex-wrap">
+            <a href="{{ url_for('order') }}" class="btn btn-primary btn-lg">
+                <i class="fas fa-camera"></i> Заказать фотосессию
+            </a>
+            <a href="{{ url_for('portfolio') }}" class="btn btn-outline-primary btn-lg">
+                <i class="fas fa-images"></i> Смотреть портфолио
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Photos Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="section-title">
+            <h2>Избранные работы</h2>
+            <p>Лучшие кадры из нашего портфолио</p>
+        </div>
+        
+        <div class="row">
+            {% for photo in featured_photos %}
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card photo-card">
+                    <div class="price-tag">{{ photo.price }}₽</div>
+                    <img src="https://via.placeholder.com/400x300/{{ ['e74c3c', '3498db', '2ecc71', 'f39c12', '9b59b6', '1abc9c'] | random }}/ffffff?text={{ photo.title | urlencode }}" alt="{{ photo.title }}">
+                    <div class="photo-overlay">
+                        <h5>{{ photo.title }}</h5>
+                        <p>{{ photo.description }}</p>
+                        <span class="badge bg-primary">{{ photo.category }}</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="text-center mt-4">
+            <a href="{{ url_for('portfolio') }}" class="btn btn-outline-primary btn-lg">
+                <i class="fas fa-images"></i> Смотреть все работы
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="section-title">
+            <h2>Наши услуги</h2>
+            <p>Широкий спектр фотоуслуг для любых потребностей</p>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <i class="fas fa-user-tie fa-3x text-primary mb-3"></i>
+                        <h5 class="card-title">Портретная съемка</h5>
+                        <p class="card-text">Профессиональные портреты для бизнеса и личного использования</p>
+                        <p class="text-primary fw-bold">от 1500₽</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <i class="fas fa-heart fa-3x text-danger mb-3"></i>
+                        <h5 class="card-title">Свадебная съемка</h5>
+                        <p class="card-text">Запечатлейте самый важный день в вашей жизни</p>
+                        <p class="text-primary fw-bold">от 5000₽</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <i class="fas fa-users fa-3x text-success mb-3"></i>
+                        <h5 class="card-title">Семейная фотосессия</h5>
+                        <p class="card-text">Теплые семейные кадры для создания воспоминаний</p>
+                        <p class="text-primary fw-bold">от 3000₽</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <i class="fas fa-child fa-3x text-warning mb-3"></i>
+                        <h5 class="card-title">Детская съемка</h5>
+                        <p class="card-text">Забавные и трогательные кадры ваших малышей</p>
+                        <p class="text-primary fw-bold">от 2000₽</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-4">
+            <a href="{{ url_for('services') }}" class="btn btn-primary btn-lg">
+                <i class="fas fa-info-circle"></i> Подробнее об услугах
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Categories Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="section-title">
+            <h2>Категории фотографий</h2>
+            <p>Выберите интересующую вас категорию</p>
+        </div>
+        
+        <div class="row justify-content-center">
+            {% for category in categories %}
+            <div class="col-lg-2 col-md-4 col-6 mb-3">
+                <a href="{{ url_for('portfolio', category=category) }}" class="text-decoration-none">
+                    <div class="card text-center h-100">
+                        <div class="card-body">
+                            <i class="fas fa-camera fa-2x text-primary mb-2"></i>
+                            <h6 class="card-title">{{ category }}</h6>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Why Choose Us Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="section-title">
+            <h2>Почему выбирают нас</h2>
+            <p>Наши преимущества в работе с клиентами</p>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="text-center">
+                    <i class="fas fa-award fa-3x text-warning mb-3"></i>
+                    <h5>Опыт и профессионализм</h5>
+                    <p>Более 10 лет в сфере фотографии</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="text-center">
+                    <i class="fas fa-clock fa-3x text-primary mb-3"></i>
+                    <h5>Быстрая обработка</h5>
+                    <p>Готовые фото в течение 3-5 дней</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="text-center">
+                    <i class="fas fa-heart fa-3x text-danger mb-3"></i>
+                    <h5>Индивидуальный подход</h5>
+                    <p>Учитываем все ваши пожелания</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="text-center">
+                    <i class="fas fa-star fa-3x text-success mb-3"></i>
+                    <h5>Высокое качество</h5>
+                    <p>Используем профессиональную технику</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5" style="background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); color: white;">
+    <div class="container text-center">
+        <h2 class="mb-4">Готовы создать незабываемые воспоминания?</h2>
+        <p class="mb-4">Свяжитесь с нами и забронируйте дату для фотосессии</p>
+        <div class="d-flex gap-3 justify-content-center flex-wrap">
+            <a href="{{ url_for('order') }}" class="btn btn-primary btn-lg">
+                <i class="fas fa-calendar-alt"></i> Забронировать дату
+            </a>
+            <a href="{{ url_for('contact') }}" class="btn btn-outline-light btn-lg">
+                <i class="fas fa-phone"></i> Связаться с нами
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+

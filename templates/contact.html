@@ -1,0 +1,318 @@
+{% extends "base.html" %}
+
+{% block title %}Контакты - Фотостудия{% endblock %}
+
+{% block content %}
+<!-- Contact Header -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="section-title">
+            <h2>Контакты</h2>
+            <p>Свяжитесь с нами любым удобным способом</p>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Information -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mb-5">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="mb-0"><i class="fas fa-envelope"></i> Напишите нам</h4>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="name" class="form-label">Ваше имя *</label>
+                                    <input type="text" class="form-control" id="name" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="email" class="form-label">Email *</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="subject" class="form-label">Тема сообщения</label>
+                                <select class="form-select" id="subject">
+                                    <option value="">Выберите тему</option>
+                                    <option value="general">Общий вопрос</option>
+                                    <option value="booking">Бронирование</option>
+                                    <option value="pricing">Вопросы по ценам</option>
+                                    <option value="cooperation">Сотрудничество</option>
+                                    <option value="other">Другое</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Сообщение *</label>
+                                <textarea class="form-control" id="message" rows="5" required 
+                                          placeholder="Опишите ваш вопрос или пожелание..."></textarea>
+                            </div>
+                            
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-paper-plane"></i> Отправить сообщение
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-map-marker-alt text-primary"></i> Адрес</h5>
+                        <p class="card-text">
+                            г. Москва, ул. Фотографов, д. 1<br>
+                            Бизнес-центр "Фотостудия"<br>
+                            3 этаж, офис 305
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-phone text-primary"></i> Телефоны</h5>
+                        <p class="card-text">
+                            <strong>Основной:</strong><br>
+                            <a href="tel:+79991234567" class="text-decoration-none">+7 (999) 123-45-67</a><br><br>
+                            <strong>WhatsApp:</strong><br>
+                            <a href="https://wa.me/79991234567" class="text-decoration-none">+7 (999) 123-45-67</a>
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-envelope text-primary"></i> Email</h5>
+                        <p class="card-text">
+                            <a href="mailto:info@fotostudio.ru" class="text-decoration-none">info@fotostudio.ru</a><br>
+                            <a href="mailto:booking@fotostudio.ru" class="text-decoration-none">booking@fotostudio.ru</a>
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-clock text-primary"></i> Режим работы</h5>
+                        <p class="card-text">
+                            <strong>Понедельник - Пятница:</strong><br>
+                            9:00 - 21:00<br><br>
+                            <strong>Суббота - Воскресенье:</strong><br>
+                            10:00 - 20:00<br><br>
+                            <strong>Праздничные дни:</strong><br>
+                            11:00 - 18:00
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Map Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="section-title">
+            <h2>Как нас найти</h2>
+            <p>Мы находимся в центре города</p>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-8 mb-4">
+                <div class="card">
+                    <div class="card-body p-0">
+                        <div style="height: 400px; background: #e9ecef; display: flex; align-items: center; justify-content: center;">
+                            <div class="text-center">
+                                <i class="fas fa-map fa-5x text-muted mb-3"></i>
+                                <h5>Интерактивная карта</h5>
+                                <p class="text-muted">Здесь будет встроена карта Google Maps</p>
+                                <a href="https://maps.google.com" target="_blank" class="btn btn-primary">
+                                    <i class="fas fa-external-link-alt"></i> Открыть в Google Maps
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Как добраться</h5>
+                        
+                        <h6><i class="fas fa-subway text-primary"></i> Метро</h6>
+                        <p>Станция "Фотографовская" (красная линия)<br>
+                        Выход в сторону ул. Фотографов</p>
+                        
+                        <h6><i class="fas fa-bus text-success"></i> Автобус</h6>
+                        <p>Маршруты: 123, 456, 789<br>
+                        Остановка "Фотостудия"</p>
+                        
+                        <h6><i class="fas fa-car text-warning"></i> На машине</h6>
+                        <p>Бесплатная парковка во дворе<br>
+                        GPS: 55.7558, 37.6176</p>
+                        
+                        <h6><i class="fas fa-bicycle text-info"></i> На велосипеде</h6>
+                        <p>Велосипедные дорожки по всему району<br>
+                        Стойки для парковки велосипедов</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Social Media Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="section-title">
+            <h2>Мы в социальных сетях</h2>
+            <p>Следите за нашими работами и новостями</p>
+        </div>
+        
+        <div class="row text-center">
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <i class="fab fa-instagram fa-4x text-danger mb-3"></i>
+                        <h5 class="card-title">Instagram</h5>
+                        <p class="card-text">Ежедневные фото, закулисье съемок, полезные советы</p>
+                        <a href="#" class="btn btn-outline-danger">
+                            <i class="fab fa-instagram"></i> Подписаться
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <i class="fab fa-vk fa-4x text-primary mb-3"></i>
+                        <h5 class="card-title">ВКонтакте</h5>
+                        <p class="card-text">Альбомы работ, отзывы клиентов, анонсы мероприятий</p>
+                        <a href="#" class="btn btn-outline-primary">
+                            <i class="fab fa-vk"></i> Подписаться
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <i class="fab fa-telegram fa-4x text-info mb-3"></i>
+                        <h5 class="card-title">Telegram</h5>
+                        <p class="card-text">Быстрые уведомления, акции и специальные предложения</p>
+                        <a href="#" class="btn btn-outline-info">
+                            <i class="fab fa-telegram"></i> Подписаться
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <i class="fab fa-youtube fa-4x text-danger mb-3"></i>
+                        <h5 class="card-title">YouTube</h5>
+                        <p class="card-text">Видеоуроки, обзоры техники, интервью с клиентами</p>
+                        <a href="#" class="btn btn-outline-danger">
+                            <i class="fab fa-youtube"></i> Подписаться
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="section-title">
+            <h2>Часто задаваемые вопросы</h2>
+            <p>Ответы на популярные вопросы</p>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="accordion" id="faqAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faq1">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1">
+                                Как забронировать фотосессию?
+                            </button>
+                        </h2>
+                        <div id="collapse1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Вы можете забронировать фотосессию через форму на сайте, по телефону или лично в студии. Рекомендуем бронировать дату за 2-3 недели до желаемой съемки.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faq2">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2">
+                                Сколько времени занимает обработка фотографий?
+                            </button>
+                        </h2>
+                        <div id="collapse2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Время обработки зависит от выбранного тарифа: базовый - 3-5 дней, стандарт - 2-3 дня, премиум - 1-2 дня. При срочности возможна дополнительная плата за экспресс-обработку.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faq3">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3">
+                                Можно ли перенести дату съемки?
+                            </button>
+                        </h2>
+                        <div id="collapse3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Да, перенос даты возможен при уведомлении не менее чем за 48 часов до съемки. При более позднем уведомлении может взиматься штраф в размере 50% от стоимости.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="faq4">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4">
+                                Что включено в стоимость фотосессии?
+                            </button>
+                        </h2>
+                        <div id="collapse4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                В стоимость входит: время фотографа, съемка, базовая обработка, передача цифровых файлов. Дополнительно можно заказать: ретушь, печать, создание альбома, видеосъемку.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5 bg-primary text-white">
+    <div class="container text-center">
+        <h3 class="mb-4">Остались вопросы?</h3>
+        <p class="mb-4">Свяжитесь с нами любым удобным способом</p>
+        <div class="d-flex gap-3 justify-content-center flex-wrap">
+            <a href="{{ url_for('order') }}" class="btn btn-light btn-lg">
+                <i class="fas fa-camera"></i> Заказать фотосессию
+            </a>
+            <a href="tel:+79991234567" class="btn btn-outline-light btn-lg">
+                <i class="fas fa-phone"></i> Позвонить нам
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

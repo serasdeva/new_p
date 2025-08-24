@@ -1,0 +1,193 @@
+{% extends "base.html" %}
+
+{% block title %}Заказ фотосессии - Фотостудия{% endblock %}
+
+{% block content %}
+<!-- Order Header -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="section-title">
+            <h2>Заказ фотосессии</h2>
+            <p>Заполните форму и мы свяжемся с вами для обсуждения деталей</p>
+        </div>
+    </div>
+</section>
+
+<!-- Order Form -->
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h4 class="mb-0"><i class="fas fa-camera"></i> Форма заказа</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST" id="orderForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="name" class="form-label">Ваше имя *</label>
+                                    <input type="text" class="form-control" id="name" name="name" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="email" class="form-label">Email *</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="phone" class="form-label">Телефон</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone" placeholder="+7 (999) 123-45-67">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="session_type" class="form-label">Тип фотосессии *</label>
+                                    <select class="form-select" id="session_type" name="session_type" required>
+                                        <option value="">Выберите тип</option>
+                                        <option value="Портретная съемка">Портретная съемка</option>
+                                        <option value="Свадебная фотосъемка">Свадебная фотосъемка</option>
+                                        <option value="Семейная фотосессия">Семейная фотосессия</option>
+                                        <option value="Детская фотосессия">Детская фотосессия</option>
+                                        <option value="Модная фотосъемка">Модная фотосъемка</option>
+                                        <option value="Пейзажная фотография">Пейзажная фотография</option>
+                                        <option value="Корпоративная съемка">Корпоративная съемка</option>
+                                        <option value="Другое">Другое</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="date" class="form-label">Желаемая дата *</label>
+                                    <input type="date" class="form-control" id="date" name="date" required min="{{ today }}">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="location" class="form-label">Место съемки</label>
+                                    <input type="text" class="form-control" id="location" name="location" placeholder="Студия, парк, дом и т.д.">
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Дополнительная информация</label>
+                                <textarea class="form-control" id="message" name="message" rows="4" 
+                                          placeholder="Опишите ваши пожелания, особые требования или вопросы..."></textarea>
+                            </div>
+                            
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-paper-plane"></i> Отправить заказ
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Order Information -->
+                <div class="card mt-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-info-circle"></i> Информация о заказе</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>Что происходит после отправки заказа:</h6>
+                                <ul class="list-unstyled">
+                                    <li><i class="fas fa-check text-success"></i> Мы получим ваш заказ</li>
+                                    <li><i class="fas fa-check text-success"></i> Свяжемся с вами в течение 24 часов</li>
+                                    <li><i class="fas fa-check text-success"></i> Обсудим детали и стоимость</li>
+                                    <li><i class="fas fa-check text-success"></i> Подтвердим дату и время</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Что подготовить к фотосессии:</h6>
+                                <ul class="list-unstyled">
+                                    <li><i class="fas fa-star text-warning"></i> Продумать образы и одежду</li>
+                                    <li><i class="fas fa-star text-warning"></i> Выбрать аксессуары</li>
+                                    <li><i class="fas fa-star text-warning"></i> Хорошее настроение</li>
+                                    <li><i class="fas fa-star text-warning"></i> Время на подготовку</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pricing Information -->
+                <div class="card mt-4">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-tags"></i> Примерные цены</h5>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <div class="text-center">
+                                    <h6 class="text-primary">Портретная съемка</h6>
+                                    <p class="fw-bold">от 1500₽</p>
+                                    <small class="text-muted">1-2 часа, 20-30 фото</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="text-center">
+                                    <h6 class="text-primary">Семейная фотосессия</h6>
+                                    <p class="fw-bold">от 3000₽</p>
+                                    <small class="text-muted">2-3 часа, 40-50 фото</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="text-center">
+                                    <h6 class="text-primary">Свадебная съемка</h6>
+                                    <p class="fw-bold">от 5000₽</p>
+                                    <small class="text-muted">Весь день, 200+ фото</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center mt-3">
+                            <p class="text-muted mb-0"><small>* Точная стоимость зависит от сложности и продолжительности съемки</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact CTA -->
+<section class="py-5 bg-light">
+    <div class="container text-center">
+        <h3 class="mb-4">Остались вопросы?</h3>
+        <p class="mb-4">Свяжитесь с нами любым удобным способом</p>
+        <div class="d-flex gap-3 justify-content-center flex-wrap">
+            <a href="{{ url_for('contact') }}" class="btn btn-primary">
+                <i class="fas fa-phone"></i> Контакты
+            </a>
+            <a href="{{ url_for('portfolio') }}" class="btn btn-outline-primary">
+                <i class="fas fa-images"></i> Портфолио
+            </a>
+        </div>
+    </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Устанавливаем минимальную дату на сегодня
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('date').min = today;
+    
+    // Валидация формы
+    const form = document.getElementById('orderForm');
+    form.addEventListener('submit', function(e) {
+        const date = document.getElementById('date').value;
+        const selectedDate = new Date(date);
+        const today = new Date();
+        
+        if (selectedDate < today) {
+            e.preventDefault();
+            alert('Дата не может быть в прошлом!');
+            return false;
+        }
+        
+        // Проверяем, что выбрана дата
+        if (!date) {
+            e.preventDefault();
+            alert('Пожалуйста, выберите дату!');
+            return false;
+        }
+    });
+});
+</script>
+{% endblock %}

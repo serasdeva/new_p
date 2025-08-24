@@ -1,0 +1,423 @@
+{% extends "base.html" %}
+
+{% block title %}Управление фотографиями - Админ панель{% endblock %}
+
+{% block content %}
+<!-- Admin Photos Header -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h2><i class="fas fa-images"></i> Управление фотографиями</h2>
+                <p class="mb-0">Просмотр и управление всеми фотографиями в портфолио</p>
+            </div>
+            <a href="{{ url_for('admin') }}" class="btn btn-outline-primary">
+                <i class="fas fa-arrow-left"></i> Назад к панели
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Photos Management -->
+<section class="py-5">
+    <div class="container">
+        <!-- Filters -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label class="form-label">Категория</label>
+                        <select class="form-select" id="categoryFilter">
+                            <option value="">Все категории</option>
+                            <option value="Портрет">Портрет</option>
+                            <option value="Свадьба">Свадьба</option>
+                            <option value="Семья">Семья</option>
+                            <option value="Дети">Дети</option>
+                            <option value="Мода">Мода</option>
+                            <option value="Пейзаж">Пейзаж</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Статус</label>
+                        <select class="form-select" id="featuredFilter">
+                            <option value="">Все фото</option>
+                            <option value="featured">Избранные</option>
+                            <option value="regular">Обычные</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Цена от</label>
+                        <input type="number" class="form-control" id="priceFrom" placeholder="0">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Цена до</label>
+                        <input type="number" class="form-control" id="priceTo" placeholder="10000">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <button class="btn btn-primary" onclick="applyPhotoFilters()">
+                            <i class="fas fa-filter"></i> Применить фильтры
+                        </button>
+                        <button class="btn btn-outline-secondary ms-2" onclick="clearPhotoFilters()">
+                            <i class="fas fa-times"></i> Сбросить
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Photos Grid -->
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Фотографии ({{ photos|length }})</h5>
+                <div>
+                    <button class="btn btn-success btn-sm" onclick="addNewPhoto()">
+                        <i class="fas fa-plus"></i> Добавить фото
+                    </button>
+                    <button class="btn btn-info btn-sm ms-2" onclick="exportPhotos()">
+                        <i class="fas fa-download"></i> Экспорт
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                {% if photos %}
+                <div class="row" id="photosGrid">
+                    {% for photo in photos %}
+                    <div class="col-lg-4 col-md-6 mb-4" data-photo-id="{{ photo.id }}" 
+                         data-category="{{ photo.category }}" data-featured="{{ photo.featured|lower }}" 
+                         data-price="{{ photo.price }}">
+                        <div class="card h-100">
+                            <div class="position-relative">
+                                <img src="https://via.placeholder.com/400x300/{{ ['e74c3c', '3498db', '2ecc71', 'f39c12', '9b59b6', '1abc9c'] | random }}/ffffff?text={{ photo.title | urlencode }}" 
+                                     class="card-img-top" alt="{{ photo.title }}">
+                                <div class="position-absolute top-0 end-0 m-2">
+                                    {% if photo.featured %}
+                                    <span class="badge bg-warning">Избранное</span>
+                                    {% endif %}
+                                    <span class="badge bg-primary">{{ photo.price }}₽</span>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h6 class="card-title">{{ photo.title }}</h6>
+                                <p class="card-text small">{{ photo.description[:100] }}{% if photo.description|length > 100 %}...{% endif %}</p>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <span class="badge bg-secondary">{{ photo.category }}</span>
+                                    <small class="text-muted">{{ photo.created_at.strftime('%d.%m.%Y') }}</small>
+                                </div>
+                                <div class="btn-group w-100" role="group">
+                                    <button class="btn btn-sm btn-outline-primary" onclick="viewPhotoDetails({{ photo.id }})">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-success" onclick="editPhoto({{ photo.id }})">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-warning" onclick="toggleFeatured({{ photo.id }})">
+                                        {% if photo.featured %}
+                                        <i class="fas fa-star"></i>
+                                        {% else %}
+                                        <i class="fas fa-star-o"></i>
+                                        {% endif %}
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger" onclick="deletePhoto({{ photo.id }})">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <div class="text-center py-5">
+                    <i class="fas fa-images fa-3x text-muted mb-3"></i>
+                    <h5>Фотографий пока нет</h5>
+                    <p class="text-muted">Добавьте первые фотографии в портфолио</p>
+                    <button class="btn btn-primary" onclick="addNewPhoto()">
+                        <i class="fas fa-plus"></i> Добавить фото
+                    </button>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Photo Details Modal -->
+<div class="modal fade" id="photoDetailsModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Детали фотографии</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="photoDetailsContent">
+                <!-- Content will be loaded here -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                <button type="button" class="btn btn-primary" onclick="editPhotoFromModal()">Редактировать</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add/Edit Photo Modal -->
+<div class="modal fade" id="photoEditModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="photoEditModalTitle">Добавить фотографию</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="photoForm">
+                    <div class="mb-3">
+                        <label for="photoTitle" class="form-label">Название *</label>
+                        <input type="text" class="form-control" id="photoTitle" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="photoDescription" class="form-label">Описание</label>
+                        <textarea class="form-control" id="photoDescription" rows="3"></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="photoCategory" class="form-label">Категория *</label>
+                                <select class="form-select" id="photoCategory" required>
+                                    <option value="">Выберите категорию</option>
+                                    <option value="Портрет">Портрет</option>
+                                    <option value="Свадьба">Свадьба</option>
+                                    <option value="Семья">Семья</option>
+                                    <option value="Дети">Дети</option>
+                                    <option value="Мода">Мода</option>
+                                    <option value="Пейзаж">Пейзаж</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="photoPrice" class="form-label">Цена (₽)</label>
+                                <input type="number" class="form-control" id="photoPrice" min="0" step="100">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="photoFilename" class="form-label">Имя файла</label>
+                        <input type="text" class="form-control" id="photoFilename" placeholder="photo1.jpg">
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="photoFeatured">
+                        <label class="form-check-label" for="photoFeatured">
+                            Избранная фотография
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+                <button type="button" class="btn btn-primary" onclick="savePhoto()">Сохранить</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Filter functions
+function applyPhotoFilters() {
+    const category = document.getElementById('categoryFilter').value;
+    const featured = document.getElementById('featuredFilter').value;
+    const priceFrom = document.getElementById('priceFrom').value;
+    const priceTo = document.getElementById('priceTo').value;
+    
+    const photos = document.querySelectorAll('#photosGrid > div');
+    
+    photos.forEach(photo => {
+        let show = true;
+        
+        // Category filter
+        if (category && photo.dataset.category !== category) {
+            show = false;
+        }
+        
+        // Featured filter
+        if (featured) {
+            if (featured === 'featured' && photo.dataset.featured !== 'true') {
+                show = false;
+            } else if (featured === 'regular' && photo.dataset.featured !== 'false') {
+                show = false;
+            }
+        }
+        
+        // Price filters
+        if (priceFrom && parseFloat(photo.dataset.price) < parseFloat(priceFrom)) {
+            show = false;
+        }
+        
+        if (priceTo && parseFloat(photo.dataset.price) > parseFloat(priceTo)) {
+            show = false;
+        }
+        
+        photo.style.display = show ? '' : 'none';
+    });
+}
+
+function clearPhotoFilters() {
+    document.getElementById('categoryFilter').value = '';
+    document.getElementById('featuredFilter').value = '';
+    document.getElementById('priceFrom').value = '';
+    document.getElementById('priceTo').value = '';
+    
+    const photos = document.querySelectorAll('#photosGrid > div');
+    photos.forEach(photo => photo.style.display = '');
+}
+
+// Photo management functions
+function addNewPhoto() {
+    document.getElementById('photoEditModalTitle').textContent = 'Добавить фотографию';
+    document.getElementById('photoForm').reset();
+    
+    const modal = new bootstrap.Modal(document.getElementById('photoEditModal'));
+    modal.show();
+}
+
+function editPhoto(photoId) {
+    // Find the photo card
+    const photoCard = document.querySelector(`[data-photo-id="${photoId}"]`);
+    if (!photoCard) return;
+    
+    // Get photo data from the card
+    const title = photoCard.querySelector('.card-title').textContent;
+    const description = photoCard.querySelector('.card-text').textContent;
+    const category = photoCard.dataset.category;
+    const price = photoCard.dataset.price;
+    const featured = photoCard.dataset.featured === 'true';
+    
+    // Populate form
+    document.getElementById('photoEditModalTitle').textContent = 'Редактировать фотографию';
+    document.getElementById('photoTitle').value = title;
+    document.getElementById('photoDescription').value = description;
+    document.getElementById('photoCategory').value = category;
+    document.getElementById('photoPrice').value = price;
+    document.getElementById('photoFeatured').checked = featured;
+    
+    // Store photo ID for editing
+    document.getElementById('photoForm').dataset.editId = photoId;
+    
+    const modal = new bootstrap.Modal(document.getElementById('photoEditModal'));
+    modal.show();
+}
+
+function savePhoto() {
+    const form = document.getElementById('photoForm');
+    const editId = form.dataset.editId;
+    
+    // Validate form
+    if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+    }
+    
+    // Get form data
+    const photoData = {
+        title: document.getElementById('photoTitle').value,
+        description: document.getElementById('photoDescription').value,
+        category: document.getElementById('photoCategory').value,
+        price: parseFloat(document.getElementById('photoPrice').value) || 0,
+        featured: document.getElementById('photoFeatured').checked,
+        filename: document.getElementById('photoFilename').value || 'photo.jpg'
+    };
+    
+    if (editId) {
+        // Update existing photo
+        updatePhoto(editId, photoData);
+    } else {
+        // Add new photo
+        addPhoto(photoData);
+    }
+}
+
+function addPhoto(photoData) {
+    // This would typically make an AJAX call to the server
+    alert('Добавление фотографии - функция в разработке');
+    console.log('New photo data:', photoData);
+    
+    // Close modal
+    const modal = bootstrap.Modal.getInstance(document.getElementById('photoEditModal'));
+    modal.hide();
+}
+
+function updatePhoto(photoId, photoData) {
+    // This would typically make an AJAX call to the server
+    alert(`Обновление фотографии #${photoId} - функция в разработке`);
+    console.log('Updated photo data:', photoData);
+    
+    // Close modal
+    const modal = bootstrap.Modal.getInstance(document.getElementById('photoEditModal'));
+    modal.hide();
+}
+
+function viewPhotoDetails(photoId) {
+    // Find the photo card
+    const photoCard = document.querySelector(`[data-photo-id="${photoId}"]`);
+    if (!photoCard) return;
+    
+    // Get photo data from the card
+    const title = photoCard.querySelector('.card-title').textContent;
+    const description = photoCard.querySelector('.card-text').textContent;
+    const category = photoCard.dataset.category;
+    const price = photoCard.dataset.price;
+    const featured = photoCard.dataset.featured === 'true';
+    const created = photoCard.querySelector('.text-muted').textContent;
+    
+    // Populate modal content
+    document.getElementById('photoDetailsContent').innerHTML = `
+        <div class="row">
+            <div class="col-md-6">
+                <img src="https://via.placeholder.com/400x300/{{ ['e74c3c', '3498db', '2ecc71', 'f39c12', '9b59b6', '1abc9c'] | random }}/ffffff?text={{ title | urlencode }}" 
+                     class="img-fluid rounded" alt="${title}">
+            </div>
+            <div class="col-md-6">
+                <h6>Основная информация</h6>
+                <p><strong>ID:</strong> #${photoId}</p>
+                <p><strong>Название:</strong> ${title}</p>
+                <p><strong>Категория:</strong> ${category}</p>
+                <p><strong>Цена:</strong> ${price}₽</p>
+                <p><strong>Статус:</strong> ${featured ? 'Избранная' : 'Обычная'}</p>
+                <p><strong>Дата создания:</strong> ${created}</p>
+                
+                <h6 class="mt-3">Описание</h6>
+                <p>${description}</p>
+            </div>
+        </div>
+    `;
+    
+    // Show modal
+    const modal = new bootstrap.Modal(document.getElementById('photoDetailsModal'));
+    modal.show();
+}
+
+function editPhotoFromModal() {
+    const modal = bootstrap.Modal.getInstance(document.getElementById('photoDetailsModal'));
+    modal.hide();
+    // Add edit functionality here
+}
+
+function toggleFeatured(photoId) {
+    // This would typically make an AJAX call to the server
+    alert(`Переключение статуса избранной для фото #${photoId} - функция в разработке`);
+}
+
+function deletePhoto(photoId) {
+    if (confirm(`Вы уверены, что хотите удалить фотографию #${photoId}?`)) {
+        // This would typically make an AJAX call to the server
+        alert(`Удаление фотографии #${photoId} - функция в разработке`);
+    }
+}
+
+function exportPhotos() {
+    // Export photos to CSV or Excel
+    alert('Экспорт фотографий - функция в разработке');
+}
+</script>
+{% endblock %}
