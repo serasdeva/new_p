@@ -1,5 +1,11 @@
+<<<<<<< HEAD
 Flask==2.3.3
 Flask-SQLAlchemy==3.0.5
 Werkzeug==2.3.7
 
 
+=======
+Flask==3.1.1
+pytest==8.3.3
+ruff==0.12.8
+>>>>>>> a92b9e51f62ce65f87de2815299c0d2b535159e6

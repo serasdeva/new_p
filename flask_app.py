@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -260,4 +261,16 @@ if __name__ == '__main__':
 
     app.run(debug=True)
 
+=======
+
+# A very simple Flask Hello World app for you to get started with...
+
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route('/')
+def hello_world():
+    return 'Hello from Flask!'
+>>>>>>> a92b9e51f62ce65f87de2815299c0d2b535159e6
 
