@@ -11,6 +11,12 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 
+@app.before_request
+def ensure_database_initialized():
+    if not getattr(app, "_database_initialized", False):
+        db.create_all()
+        app._database_initialized = True
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True, nullable=False)
@@ -81,6 +87,10 @@ def about():
 @app.route('/contact')
 def contact():
     return render_template('contact.html')
+
+@app.route('/healthz')
+def healthz():
+    return 'ok', 200
 
 @app.route('/order', methods=['GET', 'POST'])
 def order():
